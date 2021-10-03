@@ -3,7 +3,7 @@
 
 
 <form (ngSubmit)="guardar()" 
-      autocomplete="off"
+       autocomplete="off"
       #miFormulario="ngForm">
     
     <!-- NOMBRE -->
@@ -13,7 +13,7 @@
             <input type="text"
                    class="form-control"
                    placeholder="Nombre de la persona"
-                   ngModel
+                   [(ngModel)]="persona.nombre"
                    name="nombre"
                    required>
 
@@ -30,11 +30,17 @@
         <label class="col-sm-3 col-form-label">Agregar</label>
         <div class="col-sm-9">
             <div class="input-group">
-
+                
                 <input type="text"
                        class="form-control"
+                       [(ngModel)]="nuevoJuego"
+                       (keyup.enter)="agregarJuego()"
+                       name="nuevoJuego"
                        placeholder="Agregar favorito">
-                <button type="button" class="btn btn-outline-primary">
+                
+                <button type="button" 
+                    class="btn btn-outline-primary"
+                    (click)="agregarJuego()">
                     Agregar
                 </button>
             </div>
@@ -43,14 +49,24 @@
 
     <!-- Lista de Juegos Favoritos -->
     <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Nombre</label>
+        <label class="col-sm-3 col-form-label">Favoritos</label>
         <div class="col-sm-9">
 
-            <input class="form-control mb-1">
-            <input class="form-control mb-1">
-            <input class="form-control mb-1">
-            <input class="form-control mb-1">
-            <input class="form-control mb-1">
+            <div class="input-group mb-1"
+                *ngFor="let juego of persona.favoritos; let i = index">
+
+                <input class="form-control"
+                       [(ngModel)]="juego.nombre"
+                       name="nombre_{{ i }}"
+                       [placeholder]="juego.nombre"
+                       required>
+
+                <button class="btn btn-outline-danger"
+                        type="button"
+                        (click)="eliminar(i)">
+                    Eliminar
+                </button>
+            </div>
 
 
         </div>
@@ -68,3 +84,7 @@
         </div>
     </div>
 </form>
+
+<span>Persona</span>
+
+<pre> {{ persona | json }}</pre>
