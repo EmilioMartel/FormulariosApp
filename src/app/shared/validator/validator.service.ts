@@ -36,7 +36,7 @@ export class ValidatorService {
       }
 
       formGroup.get(campo2)?.setErrors(null); 
-      return null
+      return null;
     }
   }
 }

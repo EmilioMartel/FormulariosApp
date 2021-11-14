@@ -11,10 +11,6 @@ import { ValidatorService } from '../../../shared/validator/validator.service';
 })
 export class RegistroComponent implements OnInit {
   
-  
-
-
-
   miFormulario: FormGroup = this.fb.group({
     nombre: ['',[ Validators.required, Validators.pattern(this.validatorService.nombreApellidoPattern) ]],
     email:['',[Validators.required, Validators.pattern(this.validatorService.emailPattern)]],
